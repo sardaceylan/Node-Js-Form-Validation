@@ -1,25 +1,18 @@
-const data = [
-    {
-        name: null,
-        email: null,
-        pass: null,
-        repass: null
-    }
-]
+const connection = require("../utility/database")
 
 module.exports = class Registry {
-    constructor(name, email, pass, repass){
-        this.name = name
+    constructor(username, email, password, repassword) {
+        this.username = username
         this.email = email
-        this.pass = pass
-        this.repass = repass
+        this.password = password
+        this.repassword = repassword
     }
 
-    save(){
-        data.push(this)
+    save() {
+        connection.query("INSERT INTO REGISTRY (username, email, password, repassword) VALUES (?,?,?,?)", [this.username, this.email, this.password, this.repassword])
     }
 
-    static getAll(){
-        return data
+    static getAll() {
+        return connection.query("SELECT * FROM REGISTRY")
     }
 }

@@ -6,20 +6,27 @@ exports.getIndex = (req, res) => {
 
 exports.getRegister = (req, res) => {
     res.render("register")
+    const register = Registry.getAll()
 }
 
 exports.postRegister = (req,res) => {
     // console.log(req.body)
     const registry = new Registry()
-    registry.name = req.body.username
+    registry.username = req.body.username
     registry.email = req.body.email
-    registry.pass = req.body.pass
-    registry.repass = req.body.repass
+    registry.password = req.body.password
+    registry.repassword = req.body.repassword
 
     registry.save()
-    console.log(Registry.getAll());
+    Registry.getAll()
+    .then(()=>{
+        res.redirect("/register")
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
     
-    res.redirect("/register")
+    
 }
 
 // exports.postRegister = (req, res) => {

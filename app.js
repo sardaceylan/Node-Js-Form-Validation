@@ -7,7 +7,7 @@ app.set("view engine", "ejs")
 
 const userRoutes = require('./routes/route');
 // const urlencoded = bodyParser.urlencoded({ extended: false })
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(userRoutes)
 
 app.listen(3000, () => {
